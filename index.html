@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>外脑 External Brain | 硬科技企业的增长神经中枢</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'eb-black': '#0A0A0A',
+                        'eb-blue': '#00F0FF',
+                        'eb-gold': '#D4AF37',
+                        'eb-gray': '#1F1F1F'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'marquee': 'marquee 25s linear infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body class="bg-eb-black text-white overflow-x-hidden selection:bg-eb-blue selection:text-eb-black">
+
+    <!-- 3D Background -->
+    <canvas id="neural-bg" class="fixed top-0 left-0 w-full h-full -z-10 opacity-60"></canvas>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 glass-nav border-b border-white/10 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-eb-blue rounded-sm shadow-[0_0_15px_#00F0FF] flex items-center justify-center">
+                    <i data-lucide="brain-circuit" class="text-black w-5 h-5"></i>
+                </div>
+                <span class="text-2xl font-bold tracking-tighter">EXTERNAL <span class="text-eb-blue">BRAIN</span></span>
+            </div>
+            <div class="hidden md:flex gap-8 text-sm font-medium text-gray-300">
+                <a href="#value" class="hover:text-eb-blue transition-colors">价值主张</a>
+                <a href="#matrix" class="hover:text-eb-blue transition-colors">媒体矩阵</a>
+                <a href="#services" class="hover:text-eb-blue transition-colors">服务方案</a>
+                <a href="#case-study" class="hover:text-eb-gold transition-colors">文化案例</a>
+                <a href="#calculator" class="hover:text-eb-blue transition-colors">智能报价</a>
+            </div>
+            <a href="#contact" class="px-6 py-2 border border-eb-blue text-eb-blue hover:bg-eb-blue hover:text-eb-black transition-all duration-300 text-sm font-bold uppercase tracking-wide">
+                接入外脑
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-eb-blue/5 rounded-full blur-3xl -z-10"></div>
+        <div class="max-w-7xl mx-auto px-6 text-center z-10">
+            <div class="inline-block mb-6 px-4 py-1 border border-eb-gold/30 rounded-full bg-eb-gold/5 text-eb-gold text-xs tracking-[0.2em] uppercase animate-pulse-slow">
+                Hard Tech Growth Engine
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold mb-8 leading-tight tracking-tight">
+                硬科技公司的<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-eb-blue via-white to-eb-blue bg-[length:200%_auto] animate-gradient">第二大脑</span>
+            </h1>
+            <div class="h-16 md:h-12 mb-10">
+                <p id="typing-text" class="text-xl md:text-2xl text-gray-400 font-mono h-full"></p>
+            </div>
+            <div class="flex flex-col md:flex-row justify-center gap-4 mt-4">
+                <a href="#services" class="px-8 py-4 bg-eb-blue text-eb-black font-bold hover:bg-white hover:shadow-[0_0_30px_#00F0FF] transition-all duration-300 rounded-sm">
+                    查看两种方案
+                </a>
+                <a href="#calculator" class="px-8 py-4 border border-gray-600 hover:border-eb-gold hover:text-eb-gold transition-all duration-300 bg-black/50 backdrop-blur-sm rounded-sm">
+                    30秒匹配报价
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50">
+            <span class="text-xs uppercase tracking-widest">Scroll</span>
+            <div class="w-[1px] h-12 bg-gradient-to-b from-white to-transparent"></div>
+        </div>
+    </header>
+
+    <!-- Value Proposition (Flip Cards) -->
+    <section id="value" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-16 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">解码 · 破圈 · <span class="text-eb-gold">凝聚</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">我们不生产代码，我们构建让代码增值的信仰体系。</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8" id="pain-points-grid">
+                <!-- Cards injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Matrix Section -->
+    <section id="matrix" class="py-16 bg-eb-gray/30 border-y border-white/5 overflow-hidden">
+        <div class="text-center mb-10">
+            <h3 class="text-eb-blue tracking-widest uppercase text-sm font-bold mb-2">Media Matrix</h3>
+            <h2 class="text-2xl font-bold">全域媒体矩阵覆盖</h2>
+        </div>
+        
+        <div class="relative flex overflow-x-hidden group">
+            <div class="animate-marquee whitespace-nowrap flex gap-12 items-center text-2xl font-bold text-gray-600 hover:text-gray-400 transition-colors select-none" id="matrix-marquee">
+                <!-- Injected via JS -->
+            </div>
+            <div class="absolute top-0 animate-marquee2 whitespace-nowrap flex gap-12 items-center text-2xl font-bold text-gray-600 hover:text-gray-400 transition-colors select-none ml-12" id="matrix-marquee-2">
+                <!-- Duplicate for loop -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">战略双轨驱动</h2>
+                <p class="text-gray-400">根据企业融资阶段，提供精确制导的品牌解决方案</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 items-stretch relative">
+                <!-- 100k Plan -->
+                <div class="service-card group relative bg-black border border-white/10 p-8 hover:border-eb-blue/50 transition-all duration-500 flex flex-col">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-eb-blue transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+                    <div class="flex justify-between items-start mb-8">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-2" id="plan-100k-title">...</h3>
+                            <span class="text-sm text-eb-blue uppercase tracking-wider" id="plan-100k-sub">...</span>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-3xl font-bold text-white">¥<span id="plan-100k-price"></span><span class="text-lg text-gray-500 font-normal" id="plan-100k-unit"></span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-6 mb-8 flex-grow">
+                        <p class="text-gray-400 text-sm h-10" id="plan-100k-desc">...</p>
+                        <ul class="space-y-4" id="plan-100k-list">
+                            <!-- List items via JS -->
+                        </ul>
+                    </div>
+
+                    <button onclick="window.location.href='#contact'" class="w-full py-3 border border-white/20 hover:bg-eb-blue hover:text-black hover:border-eb-blue transition-all duration-300 font-bold uppercase tracking-wide">
+                        选择此方案
+                    </button>
+                </div>
+
+                <!-- 500k Plan -->
+                <div class="service-card group relative bg-black border border-eb-gold/30 p-8 shadow-[0_0_50px_rgba(212,175,55,0.1)] transform lg:-translate-y-4 flex flex-col">
+                    <div class="absolute top-0 right-0 bg-eb-gold text-black text-xs font-bold px-3 py-1 uppercase">Recommended</div>
+                    <div class="absolute top-0 left-0 w-full h-1 bg-eb-gold"></div>
+                    <div class="flex justify-between items-start mb-8">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-2" id="plan-500k-title">...</h3>
+                            <span class="text-sm text-eb-gold uppercase tracking-wider" id="plan-500k-sub">...</span>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-3xl font-bold text-eb-gold">¥<span id="plan-500k-price"></span><span class="text-lg text-gray-500 font-normal" id="plan-500k-unit"></span></div>
+                            <div class="text-xs text-eb-gold/80 mt-1 border border-eb-gold/30 px-2 py-0.5 rounded-full inline-block" id="plan-500k-tag">...</div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6 mb-8 flex-grow">
+                        <p class="text-gray-400 text-sm h-10" id="plan-500k-desc">...</p>
+                        <ul class="space-y-4" id="plan-500k-list">
+                            <!-- List items via JS -->
+                        </ul>
+                    </div>
+
+                    <button onclick="window.location.href='#contact'" class="w-full py-3 bg-eb-gold text-black font-bold hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(212,175,55,0.4)] uppercase tracking-wide">
+                        咨询战略年框
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scrollytelling Section (Case Study) -->
+    <section id="case-study" class="py-24 bg-black relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+        <div class="max-w-6xl mx-auto px-6 relative z-10">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1 perspective-1000" id="book-visual">
+                    <!-- 3D Book visual -->
+                    <div class="relative w-[300px] mx-auto aspect-[3/4] bg-gradient-to-br from-gray-900 to-black border border-white/10 rounded-sm p-6 transform hover:rotate-y-12 transition-transform duration-700 shadow-2xl group">
+                        <!-- Spine effect -->
+                        <div class="absolute left-2 top-0 bottom-0 w-1 bg-white/5 z-20"></div>
+                        
+                        <div class="relative z-10 h-full border border-eb-gold/30 flex flex-col justify-between p-6 text-center bg-black/40 backdrop-blur-sm">
+                            <div>
+                                <div class="text-eb-gold text-[10px] tracking-[0.4em] uppercase mb-4">External Brain Series</div>
+                                <h3 class="text-3xl font-serif text-white mb-2">计算的尽头<br>是人文</h3>
+                                <div class="w-8 h-[1px] bg-eb-gold mx-auto my-4"></div>
+                                <p class="text-gray-500 text-xs">XX科技创始人 / 著</p>
+                            </div>
+                            <div class="flex justify-center py-8">
+                                <div class="w-16 h-16 border border-eb-gold/20 rounded-full flex items-center justify-center animate-pulse-slow">
+                                    <i data-lucide="fingerprint" class="text-eb-gold w-8 h-8"></i>
+                                </div>
+                            </div>
+                            <div class="text-[10px] text-gray-600 uppercase tracking-widest">Internal Publication Strategy</div>
+                        </div>
+                        <!-- Glow effect -->
+                        <div class="absolute -inset-1 bg-eb-gold/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </div>
+                </div>
+                
+                <div class="order-1 md:order-2 space-y-8">
+                    <div class="inline-block px-3 py-1 border border-eb-blue/30 text-eb-blue text-xs uppercase tracking-wider">Case Study</div>
+                    <h2 class="text-4xl font-bold">从“卖产品”到<br><span class="text-eb-gold">“卖信仰”</span></h2>
+                    <div class="space-y-6 text-gray-400 leading-relaxed">
+                        <p>
+                            硬科技公司往往死于“只有硬度，没有温度”。我们参考<strong class="text-white">京瓷稻盛和夫</strong>的路径，为您的企业构建文化壁垒。
+                        </p>
+                        <div class="pl-4 border-l-2 border-eb-gold bg-white/5 p-4 rounded-r-sm">
+                            <p class="text-white italic text-sm">“三流企业卖产品，一流企业卖标准，顶级企业卖信仰。”</p>
+                        </div>
+                        <p>
+                            通过50万年框服务，我们将您创业路上的至暗时刻与高光瞬间，汇编成<strong class="text-white">10万字出版级书稿</strong>。这不仅是内部凝聚军心的“红宝书”，更是给投资人、人才和政府最好的“名片”。
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4 pt-4 border-t border-white/10">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-white counter" data-target="10">0</div>
+                            <div class="text-xs text-gray-500 uppercase">万字书稿</div>
+                        </div>
+                        <div class="text-center border-l border-white/10">
+                            <div class="text-3xl font-bold text-white counter" data-target="12">0</div>
+                            <div class="text-xs text-gray-500 uppercase">深度问答/年</div>
+                        </div>
+                        <div class="text-center border-l border-white/10">
+                            <div class="text-3xl font-bold text-white counter" data-target="100">0</div>
+                            <div class="text-xs text-gray-500 uppercase">官媒铺稿</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section id="calculator" class="py-24 bg-eb-gray/20 border-t border-white/5 relative">
+        <div class="max-w-4xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">外脑配置计算器</h2>
+                <p class="text-gray-400">输入您的融资阶段与核心痛点，匹配最优战略方案</p>
+            </div>
+
+            <div class="bg-black border border-white/10 p-8 md:p-12 rounded-sm shadow-2xl relative overflow-hidden">
+                <!-- Inputs -->
+                <div class="grid md:grid-cols-2 gap-12 relative z-10">
+                    <div class="space-y-8">
+                        <div>
+                            <label class="block text-sm text-eb-blue mb-4 uppercase tracking-wide font-bold flex items-center gap-2">
+                                <i data-lucide="milestone" class="w-4 h-4"></i> 1. 目前融资阶段
+                            </label>
+                            <div class="space-y-3" id="calc-stage">
+                                <!-- Options injected via JS -->
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm text-eb-blue mb-4 uppercase tracking-wide font-bold flex items-center gap-2">
+                                <i data-lucide="alert-circle" class="w-4 h-4"></i> 2. 核心痛点
+                            </label>
+                            <div class="space-y-3" id="calc-pain">
+                                <!-- Options injected via JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Result -->
+                    <div class="flex flex-col h-full">
+                        <label class="block text-sm text-eb-gold mb-4 uppercase tracking-wide font-bold text-center md:text-left">
+                            推荐方案
+                        </label>
+                        <div class="bg-eb-gray/50 border border-white/5 p-8 flex flex-col justify-center items-center text-center flex-grow relative transition-all duration-500 min-h-[300px]" id="calc-result">
+                            <div class="w-16 h-16 bg-black rounded-full flex items-center justify-center border border-white/10 mb-4">
+                                <i data-lucide="cpu" class="text-gray-500 animate-pulse"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">等待数据输入...</h3>
+                            <p class="text-sm text-gray-500">请左侧选择您的企业状况</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer id="contact" class="bg-black pt-20 pb-10 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 mb-16">
+                <div>
+                    <h2 class="text-4xl font-bold mb-6">Connect Your <br><span class="text-eb-blue">External Brain</span>.</h2>
+                    <p class="text-gray-400 mb-8 max-w-md">既然您已攻克了最难的技术，剩下的品牌难题，请交给我们。从1亿到10亿的路上，我们是您忠实的陪跑者。</p>
+                    <form class="space-y-4 max-w-md" onsubmit="event.preventDefault(); alert('咨询申请已提交，我们会尽快联系您。');">
+                        <input type="text" placeholder="企业名称" class="w-full bg-white/5 border border-white/10 px-4 py-3 text-white focus:border-eb-blue focus:outline-none transition-colors">
+                        <div class="grid grid-cols-2 gap-4">
+                            <input type="text" placeholder="联系人" class="w-full bg-white/5 border border-white/10 px-4 py-3 text-white focus:border-eb-blue focus:outline-none transition-colors">
+                            <input type="text" placeholder="微信号" class="w-full bg-white/5 border border-white/10 px-4 py-3 text-white focus:border-eb-blue focus:outline-none transition-colors">
+                        </div>
+                        <select class="w-full bg-white/5 border border-white/10 px-4 py-3 text-gray-400 focus:border-eb-blue focus:outline-none transition-colors">
+                            <option>感兴趣的方案</option>
+                            <option>10万 里程碑传播包</option>
+                            <option>50万 战略年框 (现金+期权)</option>
+                            <option>仅咨询书稿/文化业务</option>
+                        </select>
+                        <button class="w-full bg-eb-blue text-black font-bold py-3 hover:bg-white transition-colors uppercase tracking-wider">
+                            预约30分钟免费诊断
+                        </button>
+                    </form>
+                </div>
+                <div class="flex flex-col justify-between">
+                    <div class="grid grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-white font-bold mb-4">Office</h4>
+                            <ul class="space-y-2 text-sm text-gray-500">
+                                <li>Beijing · Zhongguancun</li>
+                                <li>Shenzhen · Nanshan</li>
+                                <li>Shanghai · Zhangjiang</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold mb-4">Partners</h4>
+                            <ul class="space-y-2 text-sm text-gray-500">
+                                <li>People.cn</li>
+                                <li>36Kr</li>
+                                <li>LatePost</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-10 md:mt-0">
+                        <div class="text-6xl font-bold text-white/5 tracking-tighter select-none">EXTERNAL</div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600">
+                <p>&copy; 2025 External Brain Technology. All rights reserved.</p>
+                <div class="flex gap-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module" src="three_bg.js"></script>
+    <script type="module" src="data.js"></script>
+    <script type="module" src="calculator.js"></script>
+    <script type="module" src="main.js"></script>
+</body>
+</html>
