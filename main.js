@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     lucide.createIcons();
 
     injectPainPoints();
+    injectOwnedChannels();
+    injectCapital();
     injectServiceDetails();
     injectMediaMatrix();
     initTypingEffect();
@@ -23,6 +25,30 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         duration: 0.8,
         y: 100,
+        opacity: 0,
+        stagger: 0.2,
+        ease: "power3.out"
+    });
+    
+    gsap.from("#channels-grid > div", {
+        scrollTrigger: {
+            trigger: "#channels",
+            start: "top 80%"
+        },
+        duration: 0.8,
+        y: 50,
+        opacity: 0,
+        stagger: 0.1,
+        ease: "power3.out"
+    });
+
+    gsap.from("#capital-items > div", {
+        scrollTrigger: {
+            trigger: "#capital",
+            start: "top 70%"
+        },
+        duration: 0.8,
+        x: 50,
         opacity: 0,
         stagger: 0.2,
         ease: "power3.out"
@@ -71,6 +97,70 @@ function injectPainPoints() {
     lucide.createIcons();
 }
 
+function injectOwnedChannels() {
+    const grid = document.getElementById('channels-grid');
+    if (!grid) return;
+    
+    data.ownedChannels.forEach(channel => {
+        const div = document.createElement('div');
+        div.className = "bg-white/5 border border-white/10 p-6 rounded-sm hover:border-eb-blue transition-colors group flex flex-col justify-between";
+        div.innerHTML = `
+            <div>
+                <div class="flex justify-between items-start mb-6">
+                    <div class="w-12 h-12 bg-black rounded-full border border-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="${channel.icon}" class="text-white w-6 h-6"></i>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-eb-blue font-bold text-lg whitespace-nowrap">${channel.followers}</div>
+                        <div class="text-[10px] uppercase text-gray-500 tracking-wider">Followers</div>
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-1">${channel.name}</h3>
+                <div class="text-xs text-gray-500 mb-4 font-mono">${channel.handle} · ${channel.type}</div>
+                <p class="text-sm text-gray-400 mb-6 leading-relaxed">${channel.desc}</p>
+            </div>
+            <a href="#contact" class="inline-flex items-center text-xs font-bold text-white hover:text-eb-blue transition-colors uppercase tracking-widest mt-auto">
+                联系我们 <i data-lucide="arrow-right" class="w-3 h-3 ml-1"></i>
+            </a>
+        `;
+        grid.appendChild(div);
+    });
+}
+
+function injectCapital() {
+    const capData = data.waveMakerCapital;
+    if (!capData) return;
+
+    document.getElementById('capital-title').innerText = capData.title;
+    document.getElementById('capital-subtitle').innerText = capData.subtitle;
+    document.getElementById('capital-desc').innerText = capData.desc;
+
+
+    if(capData.contact) {
+        const title = document.getElementById('cap-contact-title');
+        const wechat = document.getElementById('cap-contact-wechat');
+        const phone = document.getElementById('cap-contact-phone');
+        
+        if(title) title.innerText = capData.contact.title || "FA合作";
+        if(wechat) wechat.innerText = capData.contact.wechat;
+        if(phone) phone.innerText = capData.contact.phone;
+    }
+
+    const container = document.getElementById('capital-items');
+    capData.items.forEach(item => {
+        const div = document.createElement('div');
+        div.className = "bg-eb-black border border-white/10 p-6 hover:border-eb-gold/50 transition-all duration-300 hover:bg-eb-gray/20";
+        div.innerHTML = `
+            <div class="mb-4 text-eb-gold">
+                <i data-lucide="${item.icon}" class="w-8 h-8"></i>
+            </div>
+            <h4 class="text-lg font-bold text-white mb-2">${item.title}</h4>
+            <p class="text-sm text-gray-400 leading-relaxed">${item.content}</p>
+        `;
+        container.appendChild(div);
+    });
+}
+
 function injectServiceDetails() {
 
     const p1 = data.services.plan100k;
@@ -82,7 +172,7 @@ function injectServiceDetails() {
     
     const list100k = document.getElementById('plan-100k-list');
     p1.features.forEach(item => {
-        list100k.innerHTML += `<li class="flex items-center gap-3 text-sm text-gray-300"><i data-lucide="check" class="w-4 h-4 text-gray-500 flex-shrink-0"></i> ${item}</li>`;
+        list100k.innerHTML += `<li class="flex items-start gap-3 text-sm text-gray-300"><i data-lucide="check" class="w-4 h-4 text-gray-500 flex-shrink-0 mt-0.5"></i> ${item}</li>`;
     });
 
 
@@ -99,7 +189,7 @@ function injectServiceDetails() {
         const isHighlight = item.includes("书稿") || item.includes("问答") || item.includes("100");
         const style = isHighlight ? "text-white font-bold" : "text-gray-300";
         const iconColor = isHighlight ? "text-eb-gold" : "text-eb-blue";
-        list500k.innerHTML += `<li class="flex items-center gap-3 text-sm ${style}"><i data-lucide="check" class="w-4 h-4 ${iconColor} flex-shrink-0"></i> ${item}</li>`;
+        list500k.innerHTML += `<li class="flex items-start gap-3 text-sm ${style}"><i data-lucide="check" class="w-4 h-4 ${iconColor} flex-shrink-0 mt-0.5"></i> ${item}</li>`;
     });
 }
 
