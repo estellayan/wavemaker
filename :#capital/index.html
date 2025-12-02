@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>造浪者资本 WaveMaker Capital - 赋能硬科技</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased text-gray-100 bg-slate-900 selection:bg-amber-500 selection:text-white">
+
+    <!-- Background Layer -->
+    <div class="fixed inset-0 z-[-1]">
+        <div class="absolute inset-0 bg-cover bg-center opacity-30" 
+             style="background-image: url('https://r2.flowith.net/files/jpeg/86V8E-dynamic_tech_wave_background_index_5@1024x1024.jpeg');">
+        </div>
+        <!-- Gradient Overlay for Readability -->
+        <div class="absolute inset-0 bg-slate-900/90 bg-gradient-to-b from-slate-900/95 via-slate-900/80 to-slate-900/95"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 px-6 py-4 transition-all duration-300 border-b border-transparent">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg overflow-hidden shadow-lg shadow-amber-500/20 border border-amber-500/20 bg-black/20 backdrop-blur-sm flex items-center justify-center">
+                    <img src="https://r2.flowith.net/files/jpeg/V3QJ5-zaolangzhe_zibeng_logo_index_0@1024x1024.jpeg" alt="Logo" class="w-full h-full object-cover">
+                </div>
+                <span class="text-xl font-bold tracking-tight text-white">造浪者资本</span>
+            </div>
+            <div class="hidden md:flex gap-8 text-sm font-medium text-gray-300">
+                <a href="#about" class="hover:text-amber-500 transition-colors">关于我们</a>
+                <a href="#tracks" class="hover:text-amber-500 transition-colors">核心赛道</a>
+                <a href="#cases" class="hover:text-amber-500 transition-colors">精选案例</a>
+                <a href="#contact" class="hover:text-amber-500 transition-colors">联系方式</a>
+            </div>
+            <button class="hidden md:block btn-primary px-5 py-2 rounded-full text-sm font-bold">
+                商业计划书投递
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <canvas id="hero-canvas"></canvas>
+        
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
+            <div class="inline-block mb-6 px-4 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 backdrop-blur-md animate-fade-in">
+                <span class="text-amber-400 text-xs font-bold tracking-[0.2em] uppercase">FA 融资顾问 · 产投研驱动</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold mb-8 leading-tight text-white">
+                赋能硬科技 <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">造浪未来</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed font-light">
+                深耕机器人、智能硬件、半导体并购与医疗赛道。<br>
+                连接顶尖创业者与一线资本，做科技浪潮的助推者。
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <a href="#cases" class="btn-primary px-8 py-3 rounded-full font-bold flex items-center justify-center gap-2">
+                    查看交割案例 <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+                <a href="#about" class="btn-outline px-8 py-3 rounded-full font-bold bg-black/20 backdrop-blur-sm">
+                    了解服务体系
+                </a>
+            </div>
+        </div>
+
+        <div class="absolute bottom-10 left-0 w-full flex justify-center animate-bounce">
+            <i data-lucide="chevron-down" class="text-gray-500 w-6 h-6"></i>
+        </div>
+    </div>
+
+    <!-- About & Core Tracks Section -->
+    <section id="about" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center mb-20">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">深耕产业，精准链接</h2>
+                    <p class="text-gray-300 mb-8 leading-relaxed text-lg">
+                        造浪者资本不仅是财务顾问，更是企业的战略合伙人。我们依托强大的“产、投、研”能力，深入产业链上下游，为硬科技企业提供全生命周期的资本服务。
+                    </p>
+                    
+                    <!-- Track Cards Grid -->
+                    <div class="grid gap-4" id="tracks">
+                        <div class="track-card group">
+                            <div class="track-icon-wrapper">
+                                <img src="https://r2.flowith.net/files/jpeg/0QA8W-robot_race_icon_index_1@1024x1024.jpeg" alt="Robotics" class="object-cover w-full h-full opacity-80 group-hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-white font-bold mb-1 group-hover:text-amber-400 transition-colors">机器人与自动化</h3>
+                                <p class="text-sm text-gray-400">工业/康复/物流机器人全栈覆盖</p>
+                            </div>
+                            <i data-lucide="arrow-up-right" class="text-gray-500 w-5 h-5 group-hover:text-amber-500 transition-colors"></i>
+                        </div>
+
+                        <div class="track-card group">
+                            <div class="track-icon-wrapper">
+                                <img src="https://r2.flowith.net/files/jpeg/FUNRI-intelligent_hardware_icon_generation_index_2@1024x1024.jpeg" alt="Hardware" class="object-cover w-full h-full opacity-80 group-hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-white font-bold mb-1 group-hover:text-amber-400 transition-colors">AI智能硬件</h3>
+                                <p class="text-sm text-gray-400">从眼镜到穿戴，赋能感知交互</p>
+                            </div>
+                            <i data-lucide="arrow-up-right" class="text-gray-500 w-5 h-5 group-hover:text-amber-500 transition-colors"></i>
+                        </div>
+
+                        <div class="track-card group">
+                            <div class="track-icon-wrapper">
+                                <img src="https://r2.flowith.net/files/jpeg/X7DM7-semiconductor_acquisition_icon_index_3@1024x1024.jpeg" alt="Semiconductor" class="object-cover w-full h-full opacity-80 group-hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-white font-bold mb-1 group-hover:text-amber-400 transition-colors">半导体与并购</h3>
+                                <p class="text-sm text-gray-400">硬科技并购整合与产业链补全</p>
+                            </div>
+                            <i data-lucide="arrow-up-right" class="text-gray-500 w-5 h-5 group-hover:text-amber-500 transition-colors"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chart Area -->
+                <div class="glass-panel p-8 rounded-2xl border border-gray-700/50 relative shadow-2xl shadow-black/50 flex flex-col h-full justify-center">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-lg font-semibold text-gray-200">资源深度指数</h3>
+                        <div class="flex gap-2 items-center">
+                            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                            <span class="text-xs text-gray-500 uppercase tracking-wider">Radar Analysis</span>
+                        </div>
+                    </div>
+                    <div class="h-64 md:h-80 w-full">
+                        <canvas id="trackChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Visualization & Timeline Section -->
+    <section class="py-16 bg-black/30 border-y border-gray-800">
+        <div class="max-w-7xl mx-auto px-6">
+             <!-- Timeline Visual -->
+             <div class="mb-16 relative rounded-xl overflow-hidden border border-gray-800 shadow-2xl group">
+                <div class="absolute top-4 left-4 z-10 px-3 py-1 bg-black/60 backdrop-blur-md rounded border border-gray-700 text-xs text-amber-500 font-mono uppercase tracking-widest">
+                    Project Timeline Infographic
+                </div>
+                <img src="https://r2.flowith.net/files/jpeg/PQL2J-project_timeline_infographic_index_4@1024x1024.jpeg" 
+                     alt="Project Timeline" 
+                     class="w-full h-64 md:h-96 object-cover object-center opacity-80 group-hover:opacity-100 transition-opacity duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                <div class="absolute bottom-6 left-6 text-white">
+                    <h3 class="text-xl font-bold">全周期资本服务</h3>
+                    <p class="text-gray-400 text-sm">从Pre-A到IPO并购，陪伴企业成长的每一个关键节点</p>
+                </div>
+             </div>
+
+             <div class="grid md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-gray-800">
+                 <div class="p-6">
+                     <h3 class="text-5xl font-bold text-amber-500 mb-2 tracking-tight">30亿+</h3>
+                     <p class="text-gray-400 uppercase text-sm tracking-wider">累计交易金额</p>
+                 </div>
+                 <div class="p-6">
+                     <h3 class="text-5xl font-bold text-amber-500 mb-2 tracking-tight">17+</h3>
+                     <p class="text-gray-400 uppercase text-sm tracking-wider">近期精选交割案例</p>
+                 </div>
+                 <div class="p-6 flex flex-col items-center justify-center relative">
+                    <div class="h-24 w-full max-w-xs">
+                        <canvas id="dealStatsChart"></canvas>
+                    </div>
+                    <p class="text-gray-400 mt-4 text-xs uppercase tracking-wider">融资阶段分布</p>
+                 </div>
+             </div>
+        </div>
+    </section>
+
+    <!-- Deal Cases Section -->
+    <section id="cases" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">精选交割案例</h2>
+                <p class="text-gray-400">见证科技变革的力量</p>
+            </div>
+
+            <!-- Filters -->
+            <div id="filter-container" class="flex flex-wrap justify-center gap-3 mb-12">
+                <!-- Injected via JS -->
+            </div>
+
+            <!-- Grid -->
+            <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources / Partners -->
+    <section class="py-20 border-t border-gray-800 bg-gradient-to-b from-black/20 to-black/60">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl font-bold mb-4 text-white">合作投资机构 & 产业方</h2>
+                <p class="text-gray-400 text-sm">与顶尖资本同行，共建产业生态</p>
+            </div>
+            <div id="partners-list" class="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-black py-12 border-t border-gray-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-2">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-8 h-8 rounded overflow-hidden">
+                            <img src="https://r2.flowith.net/files/jpeg/V3QJ5-zaolangzhe_zibeng_logo_index_0@1024x1024.jpeg" alt="Logo" class="w-full h-full object-cover">
+                        </div>
+                        <span class="text-xl font-bold text-white">造浪者资本</span>
+                    </div>
+                    <p class="text-gray-500 text-sm leading-relaxed max-w-xs">
+                        致力于成为硬科技领域最值得信赖的资本合伙人。<br>
+                        重点关注：机器人、AI硬件、半导体、医疗器械。<br>
+                        深圳 · 北京 · 上海
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-semibold mb-4">联系我们</h4>
+                    <ul class="space-y-3 text-sm text-gray-500">
+                        <li class="hover:text-amber-500 cursor-pointer flex items-center gap-2 transition-colors">
+                            <i data-lucide="mail" class="w-4 h-4"></i> bp@wavemaker.cap
+                        </li>
+                        <li class="hover:text-amber-500 cursor-pointer transition-colors">媒体合作</li>
+                        <li class="hover:text-amber-500 cursor-pointer transition-colors">加入我们</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4">关注动态</h4>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-amber-500 hover:text-white transition-all hover:scale-110">
+                            <i data-lucide="message-circle" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-amber-500 hover:text-white transition-all hover:scale-110">
+                            <i data-lucide="linkedin" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-xs text-gray-600">
+                &copy; 2025 WaveMaker Capital. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="fixed inset-0 z-[100] hidden" aria-hidden="true">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity" id="modal-backdrop"></div>
+        <div class="relative min-h-screen flex items-center justify-center p-4">
+            <div class="bg-[#162032] border border-gray-700 w-full max-w-2xl rounded-2xl shadow-2xl transform transition-all scale-95 opacity-0 overflow-hidden" id="modal-content">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Module Scripts -->
+    <script type="module" src="data.js"></script>
+    <script type="module" src="main.js"></script>
+    <script>
+        // Initialize Lucide icons initially
+        lucide.createIcons();
+    </script>
+</body>
+</html>
