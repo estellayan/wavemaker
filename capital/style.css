@@ -1,0 +1,161 @@
+/* 
+ * Theme: Deep Blue & Gold 
+ * Updated for new assets and responsiveness
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --color-bg: #0B1120;
+    --color-bg-card: #162032;
+    --color-text-primary: #F3F4F6;
+    --color-text-secondary: #9CA3AF;
+    --color-accent: #F59E0B;
+    --color-accent-glow: rgba(245, 158, 11, 0.2);
+    --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    font-family: var(--font-main);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+    background: #374151;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent);
+}
+
+/* Hero Animation Canvas */
+#hero-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Glass Components */
+.glass-panel {
+    background: rgba(22, 32, 50, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+}
+
+.card-hover {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.4);
+    border-color: rgba(245, 158, 11, 0.4);
+}
+
+/* Track Cards */
+.track-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.track-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(245, 158, 11, 0.3);
+}
+.track-icon-wrapper {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background: #000;
+    flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Button Styles */
+.btn-primary {
+    background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+    color: white;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px var(--color-accent-glow);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.btn-primary:hover {
+    box-shadow: 0 6px 25px rgba(245, 158, 11, 0.4);
+    transform: scale(1.02);
+    filter: brightness(1.1);
+}
+
+.btn-outline {
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--color-text-secondary);
+    transition: all 0.3s ease;
+}
+.btn-outline:hover {
+    border-color: var(--color-accent);
+    color: var(--color-text-primary);
+    background: rgba(245, 158, 11, 0.1);
+}
+
+/* Tags */
+.tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.05);
+    color: var(--color-text-secondary);
+    border: 1px solid rgba(255,255,255,0.05);
+}
+.card-hover:hover .tag {
+    border-color: rgba(245, 158, 11, 0.2);
+    color: #E5E7EB;
+    background: rgba(245, 158, 11, 0.05);
+}
+
+/* Navigation */
+nav.scrolled {
+    background: rgba(11, 17, 32, 0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+/* Utils */
+.mask-image-gradient {
+    -webkit-mask-image: linear-gradient(to bottom left, black 0%, transparent 100%);
+    mask-image: linear-gradient(to bottom left, black 0%, transparent 100%);
+}
+
+/* Animation Keyframes */
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+    animation: fade-in 1s ease-out forwards;
+}
